@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="HeatWatch: an educational heatwave awareness portal using simulated readings.">
+<title>Dashboard | HeatWatch</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23132036'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23ffad45'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/table.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="nav-wrap"><a class="brand" href="index.html"><span class="brand-icon" aria-hidden="true">&#9728;</span> HeatWatch<span class="brand-sub">HEATWAVE INTELLIGENCE SYSTEM</span></a><nav aria-label="Main navigation"><ul><li><a href="index.html">Home</a></li><li><a href="dashboard.html" aria-current="page">Dashboard</a></li><li><a href="forecast.html">Forecast</a></li><li><a href="hotspot-map.html">Hotspot map</a></li><li><a href="alerts.html">Alerts &amp; advisories</a></li><li><a href="about-system.html">About</a></li><li><a href="subscribe.html">Subscribe</a></li><li><a href="navigation.html">Site map</a></li></ul></nav></div></header>
+<div class="demo-bar"><span class="demo-label">SIMULATION</span> College project &middot; Sample data only, not live weather or official warnings.</div>
+<main id="main">
+<div class="page-heading"><p class="eyebrow">CONDITIONS AT A GLANCE</p><h1>Heatwave dashboard</h1><p class="lead">Select a location to explore its simulated conditions and recommended precautions.</p></div>
+<div class="toolbar"><div><label for="location">Monitoring location</label>
+<select id="location"><option value="nagpur">Nagpur, Maharashtra</option><option value="pune">Pune, Maharashtra</option><option value="mumbai">Mumbai, Maharashtra</option><option value="delhi">New Delhi, Delhi</option></select></div>
+<span class="muted">Fixed sample dataset &middot; No live connection</span></div>
+<noscript><p class="note">Enable JavaScript to change locations. The comparison table below remains available.</p></noscript>
+<section id="readings" aria-live="polite">
+  <div class="section-top"><h2 id="city-title">Nagpur</h2><span id="risk-badge" class="badge high">High risk</span></div>
+  <div class="metrics">
+    <article class="metric"><p>Air temperature</p><strong id="temperature">42&deg;C</strong><span>Simulated reading</span></article>
+    <article class="metric"><p>Relative humidity</p><strong id="humidity">30%</strong><span>Moisture in the air</span></article>
+    <article class="metric"><p>Heat index</p><strong id="heat-index">45&deg;C</strong><span>Illustrative feels-like value</span></article>
+    <article class="metric risk-metric"><p>Risk level</p><strong id="risk-text">High</strong><span>Educational classification</span></article>
+  </div>
+  <div class="advice-panel"><span class="advice-symbol" aria-hidden="true">!</span><div><h3>Recommended precautions</h3><p id="advice">Limit time in the heat. Move outdoor activities to cooler hours and take regular cooling breaks.</p></div></div>
+</section>
+<section class="comparison">
+  <div class="section-top"><h2>Across the sample locations</h2><span class="muted">All values are simulated</span></div>
+  <div class="table-wrap"><table class="data-table"><caption class="sr-only">Simulated conditions for four locations</caption>
+  <thead><tr><th scope="col">Location</th><th scope="col">Temperature</th><th scope="col">Humidity</th><th scope="col">Heat index</th><th scope="col">Risk level</th></tr></thead>
+  <tbody id="comparison-body">
+  <tr><th scope="row">Nagpur</th><td>42&deg;C</td><td>30%</td><td>45&deg;C</td><td><span class="badge high">High</span></td></tr>
+  <tr><th scope="row">Pune</th><td>29&deg;C</td><td>40%</td><td>29&deg;C</td><td><span class="badge low">Low</span></td></tr>
+  <tr><th scope="row">Mumbai</th><td>32&deg;C</td><td>60%</td><td>37&deg;C</td><td><span class="badge moderate">Moderate</span></td></tr>
+  <tr><th scope="row">New Delhi</th><td>45&deg;C</td><td>30%</td><td>50&deg;C</td><td><span class="badge extreme">Extreme</span></td></tr>
+  </tbody></table></div>
+</section>
+<p class="method">Demo rule based on sample heat index: below 32&deg;C = Low; 32 to below 40&deg;C = Moderate; 40 to below 48&deg;C = High; 48&deg;C or above = Extreme. These are project-defined categories, not official warning criteria. Heat index values are fixed examples, not calculated measurements.</p>
+
+</main>
+<footer><div class="footer-inner"><div><strong>HeatWatch</strong><span>SY BTech &middot; Heatwave monitoring &amp; awareness</span></div><p>Educational prototype. Check your local weather authority for actual conditions.</p></div></footer>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

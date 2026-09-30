@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="HeatWatch: an educational heatwave awareness portal using simulated readings.">
+<title>Media &amp; awareness | HeatWatch</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23132036'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23ffad45'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/gallery.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="nav-wrap"><a class="brand" href="index.html"><span class="brand-icon" aria-hidden="true">&#9728;</span> HeatWatch<span class="brand-sub">HEATWAVE INTELLIGENCE SYSTEM</span></a><nav aria-label="Main navigation"><ul><li><a href="index.html">Home</a></li><li><a href="dashboard.html">Dashboard</a></li><li><a href="forecast.html">Forecast</a></li><li><a href="hotspot-map.html">Hotspot map</a></li><li><a href="alerts.html">Alerts &amp; advisories</a></li><li><a href="about-system.html">About</a></li><li><a href="subscribe.html">Subscribe</a></li><li><a href="navigation.html">Site map</a></li></ul></nav></div></header>
+<div class="demo-bar"><span class="demo-label">SIMULATION</span> College project &middot; Sample data only, not live weather or official warnings.</div>
+<main id="main">
+<div class="layout"><aside class="sidebar" aria-label="Portal sections"><div class="sidebar-card"><h2>Monitoring</h2><ul><li><a href="dashboard.html">Dashboard</a></li><li><a href="forecast.html">Forecast summary</a></li><li><a href="hotspot-map.html">Hotspot map</a></li></ul><h2>Advisories</h2><ul><li><a href="alerts.html">Alerts &amp; advisories</a></li><li><a href="alert-details.html">Alert bulletin</a></li><li><a href="subscribe.html">Subscribe</a></li></ul><h2>About the system</h2><ul><li><a href="about-system.html">About the system</a></li><li><a href="sources.html">Sources &amp; roles</a></li><li><a href="media.html" aria-current="page">Media &amp; awareness</a></li></ul></div></aside><div class="content"><div class="page-heading"><p class="eyebrow">MEDIA &amp; AWARENESS</p><h1>Media &amp; awareness</h1><p class="lead">Watch, listen and explore. The video and audio are short sample clips made for this project.</p></div>
+<section class="panel" style="margin-bottom:24px">
+  <h2>Heatwave awareness video</h2>
+  <video controls preload="metadata" poster="images/video-poster.png" width="640" style="max-width:100%;height:auto">
+    <source src="media/heatwave-awareness.mp4" type="video/mp4">
+    <source src="media/heatwave-awareness.webm" type="video/webm">
+    Your browser does not support the video tag. <a href="media/heatwave-awareness.mp4">Download the video</a>.
+  </video>
+</section>
+<section class="panel" style="margin-bottom:24px">
+  <h2>Audio advisory</h2>
+  <p class="muted">Browsers block audio that starts by itself, so playback begins when you press play.</p>
+  <audio id="advisory-audio" controls loop preload="none">
+    <source src="media/heat-advisory.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>
+  <p><button type="button" id="bg-audio" class="button secondary" hidden>Play advisory in the background</button></p>
+  <noscript><p class="note">JavaScript is turned off, so the background-play button is unavailable. The audio player above still works.</p></noscript>
+</section>
+<section class="panel" style="margin-bottom:24px">
+  <h2>Map of a monitored region</h2>
+  <iframe title="Map of Nagpur, Maharashtra" src="https://www.google.com/maps?q=Nagpur,Maharashtra&amp;output=embed" width="100%" height="360"
+          style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+  <p class="muted" style="margin-top:10px">If the map does not load, visit the <a href="https://mausam.imd.gov.in/" target="_blank" rel="noopener noreferrer">IMD website</a> directly. It does not allow embedding.</p>
+</section>
+<section class="panel">
+  <h2>Heat safety posters</h2>
+  <div class="gallery">
+    <figure><img src="images/tip-hydrate.svg" alt="Drop of water: drink water regularly"><figcaption>Drink water</figcaption></figure>
+    <figure><img src="images/tip-shade.svg" alt="Tree: rest in the shade"><figcaption>Rest in shade</figcaption></figure>
+    <figure><img src="images/tip-cool-indoors.svg" alt="House: stay cool indoors"><figcaption>Cool indoors</figcaption></figure>
+    <figure><img src="images/tip-light-clothing.svg" alt="T-shirt: wear light clothes"><figcaption>Wear light clothes</figcaption></figure>
+    <figure><img src="images/tip-check-on-others.svg" alt="Two people: check on others"><figcaption>Check on others</figcaption></figure>
+    <figure><img src="images/tip-avoid-peak.svg" alt="Clock: avoid the hottest hours"><figcaption>Avoid 12:00&ndash;16:00</figcaption></figure>
+  </div>
+</section>
+</div></div>
+</main>
+<footer><div class="footer-inner"><div><strong>HeatWatch</strong><span>SY BTech &middot; Heatwave monitoring &amp; awareness</span></div><p>Educational prototype. Check your local weather authority for actual conditions.</p></div></footer>
+<script>
+(function () {
+  var audio = document.getElementById('advisory-audio');
+  var btn = document.getElementById('bg-audio');
+  btn.hidden = false;
+  btn.addEventListener('click', function () {
+    if (audio.paused) {
+      audio.play().then(function () { btn.textContent = 'Stop background advisory'; })
+        .catch(function () { btn.textContent = 'Playback blocked: use the player controls'; });
+    } else {
+      audio.pause(); btn.textContent = 'Play advisory in the background';
+    }
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="HeatWatch: an educational heatwave awareness portal using simulated readings.">
+<title>Hotspot map | HeatWatch</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23132036'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23ffad45'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/layout.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="nav-wrap"><a class="brand" href="index.html"><span class="brand-icon" aria-hidden="true">&#9728;</span> HeatWatch<span class="brand-sub">HEATWAVE INTELLIGENCE SYSTEM</span></a><nav aria-label="Main navigation"><ul><li><a href="index.html">Home</a></li><li><a href="dashboard.html">Dashboard</a></li><li><a href="forecast.html">Forecast</a></li><li><a href="hotspot-map.html" aria-current="page">Hotspot map</a></li><li><a href="alerts.html">Alerts &amp; advisories</a></li><li><a href="about-system.html">About</a></li><li><a href="subscribe.html">Subscribe</a></li><li><a href="navigation.html">Site map</a></li></ul></nav></div></header>
+<div class="demo-bar"><span class="demo-label">SIMULATION</span> College project &middot; Sample data only, not live weather or official warnings.</div>
+<main id="main">
+<div class="layout"><aside class="sidebar" aria-label="Portal sections"><div class="sidebar-card"><h2>Monitoring</h2><ul><li><a href="dashboard.html">Dashboard</a></li><li><a href="forecast.html">Forecast summary</a></li><li><a href="hotspot-map.html" aria-current="page">Hotspot map</a></li></ul><h2>Advisories</h2><ul><li><a href="alerts.html">Alerts &amp; advisories</a></li><li><a href="alert-details.html">Alert bulletin</a></li><li><a href="subscribe.html">Subscribe</a></li></ul><h2>About the system</h2><ul><li><a href="about-system.html">About the system</a></li><li><a href="sources.html">Sources &amp; roles</a></li><li><a href="media.html">Media &amp; awareness</a></li></ul></div></aside><div class="content"><div class="page-heading"><p class="eyebrow">WHERE IT IS HOTTEST</p><h1>Regional heatwave hotspot map</h1><p class="lead">Click a zone on the map to open its row in the forecast table.</p></div>
+<figure class="panel" style="margin:0">
+  <img id="hotspot-img" src="images/region-map.svg" width="600" height="400" usemap="#regionmap" style="max-width:100%;height:auto;display:block;margin:0 auto"
+       alt="Schematic map with three zones: Region A North Zone, Region B Central Zone and Region C West Zone">
+  <map name="regionmap" id="regionmap">
+    <area shape="poly" coords="70,50,300,30,530,60,520,140,300,150,80,135" href="forecast.html#region-north" alt="Region A, North Zone: open forecast" title="Region A - North Zone">
+    <area shape="poly" coords="80,150,300,160,520,150,540,250,300,265,70,245" href="forecast.html#region-central" alt="Region B, Central Zone: open forecast" title="Region B - Central Zone">
+    <area shape="poly" coords="70,260,300,275,540,265,510,365,300,375,90,355" href="forecast.html#region-west" alt="Region C, West Zone: open forecast" title="Region C - West Zone">
+  </map>
+  <figcaption class="muted" style="text-align:center;margin-top:10px">Schematic map, not to scale. Sample data.</figcaption>
+</figure>
+<p style="margin-top:18px">Prefer links? <a href="forecast.html#region-north">Region A: North Zone</a> &middot; <a href="forecast.html#region-central">Region B: Central Zone</a> &middot; <a href="forecast.html#region-west">Region C: West Zone</a></p>
+</div></div>
+</main>
+<footer><div class="footer-inner"><div><strong>HeatWatch</strong><span>SY BTech &middot; Heatwave monitoring &amp; awareness</span></div><p>Educational prototype. Check your local weather authority for actual conditions.</p></div></footer>
+<script>
+// Image maps do not scale with CSS. Rescale the area coordinates when the image is resized (small screens).
+(function () {
+  var img = document.getElementById('hotspot-img');
+  var areas = document.querySelectorAll('#regionmap area');
+  var original = Array.prototype.map.call(areas, function (a) { return a.coords.split(',').map(Number); });
+  function rescale() {
+    var ratio = img.clientWidth / 600;
+    areas.forEach(function (a, i) { a.coords = original[i].map(function (n) { return Math.round(n * ratio); }).join(','); });
+  }
+  window.addEventListener('resize', rescale);
+  window.addEventListener('load', rescale);
+  rescale();
+})();
+</script>
+</body>
+</html>

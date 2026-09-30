@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="HeatWatch: an educational heatwave awareness portal using simulated readings.">
+<title>Forecast summary | HeatWatch</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23132036'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23ffad45'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/cards.css">
+<link rel="stylesheet" href="css/table.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="nav-wrap"><a class="brand" href="index.html"><span class="brand-icon" aria-hidden="true">&#9728;</span> HeatWatch<span class="brand-sub">HEATWAVE INTELLIGENCE SYSTEM</span></a><nav aria-label="Main navigation"><ul><li><a href="index.html">Home</a></li><li><a href="dashboard.html">Dashboard</a></li><li><a href="forecast.html" aria-current="page">Forecast</a></li><li><a href="hotspot-map.html">Hotspot map</a></li><li><a href="alerts.html">Alerts &amp; advisories</a></li><li><a href="about-system.html">About</a></li><li><a href="subscribe.html">Subscribe</a></li><li><a href="navigation.html">Site map</a></li></ul></nav></div></header>
+<div class="demo-bar"><span class="demo-label">SIMULATION</span> College project &middot; Sample data only, not live weather or official warnings.</div>
+<main id="main">
+<div class="layout"><aside class="sidebar" aria-label="Portal sections"><div class="sidebar-card"><h2>Monitoring</h2><ul><li><a href="dashboard.html">Dashboard</a></li><li><a href="forecast.html" aria-current="page">Forecast summary</a></li><li><a href="hotspot-map.html">Hotspot map</a></li></ul><h2>Advisories</h2><ul><li><a href="alerts.html">Alerts &amp; advisories</a></li><li><a href="alert-details.html">Alert bulletin</a></li><li><a href="subscribe.html">Subscribe</a></li></ul><h2>About the system</h2><ul><li><a href="about-system.html">About the system</a></li><li><a href="sources.html">Sources &amp; roles</a></li><li><a href="media.html">Media &amp; awareness</a></li></ul></div></aside><div class="content"><div class="page-heading"><p class="eyebrow">REGION-WISE FORECAST</p><h1>Forecast summary</h1><p class="lead">Maximum temperature and severity for each monitoring station (sample data).</p></div>
+<div class="card-row">
+  <div class="zone-card"><h3>North Zone</h3><span class="zone-temp">45&deg;C</span><span class="badge extreme">Extreme</span><p>New Delhi</p></div>
+  <div class="zone-card"><h3>Central Zone</h3><span class="zone-temp">42&deg;C</span><span class="badge high">High</span><p>Nagpur</p></div>
+  <div class="zone-card"><h3>West Zone</h3><span class="zone-temp">32&deg;C</span><span class="badge moderate">Moderate</span><p>Mumbai, Pune</p></div>
+</div>
+<div class="table-wrap">
+<table class="data-table">
+  <caption>Region-wise forecast, maximum temperature and severity (sample data)</caption>
+  <thead>
+    <tr><th rowspan="2" scope="col">Region</th><th rowspan="2" scope="col">Station</th><th colspan="2" scope="colgroup">Forecast</th></tr>
+    <tr><th scope="col">Max Temperature</th><th scope="col">Severity Level</th></tr>
+  </thead>
+  <tbody>
+    <tr id="region-north"><td>North Zone</td><td>New Delhi (AWS004)</td><td class="num">45 &deg;C</td><td><span class="badge extreme">Extreme</span></td></tr>
+    <tr id="region-central"><td>Central Zone</td><td>Nagpur (AWS001)</td><td class="num">42 &deg;C</td><td><span class="badge high">High</span></td></tr>
+    <tr id="region-west"><td>West Zone</td><td>Mumbai (AWS002)</td><td class="num">32 &deg;C</td><td><span class="badge moderate">Moderate</span></td></tr>
+    <tr><td>West Zone</td><td>Pune (AWS003)</td><td class="num">29 &deg;C</td><td><span class="badge low">Low</span></td></tr>
+  </tbody>
+  <tfoot>
+    <tr><td colspan="2">Highest forecast maximum</td><td colspan="2">45 &deg;C at New Delhi (Extreme)</td></tr>
+  </tfoot>
+</table>
+</div>
+<p class="method">Sample values. Severity uses the portal&rsquo;s demo heat-index bands, not official criteria. Station IDs follow the AWS001 format used in the observation form.</p>
+</div></div>
+</main>
+<footer><div class="footer-inner"><div><strong>HeatWatch</strong><span>SY BTech &middot; Heatwave monitoring &amp; awareness</span></div><p>Educational prototype. Check your local weather authority for actual conditions.</p></div></footer>
+</body>
+</html>

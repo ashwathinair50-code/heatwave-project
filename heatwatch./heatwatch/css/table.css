@@ -1,0 +1,16 @@
+/* ==========================================================================
+   table.css - CSS Task 7: table styling
+   Collapsed borders, header background, zebra striping, centred text.
+   ========================================================================== */
+.table-wrap{overflow-x:auto;background:#fff;border:1px solid #dce2e9;border-radius:8px}
+.data-table{border-collapse:collapse;width:100%;text-align:center}
+.data-table caption{caption-side:top;padding:14px;font-weight:700;color:#132036;font-size:17px}
+.data-table th,.data-table td{border:1px solid #dce2e9;padding:14px 18px;font-size:15px}
+.data-table thead th{background-color:#132036;color:#fff}
+.data-table thead tr+tr th{background-color:#2b384d}
+.data-table tbody tr:nth-child(even){background-color:#edf1f6}     /* zebra */
+.data-table tbody tr:hover{background-color:#fff3e2}
+.data-table tbody th{text-align:left;background:none;font-weight:600}
+.data-table tfoot td{background-color:#ffe9c7;font-weight:700}
+.data-table tr:target{outline:3px solid #ffad45;outline-offset:-3px}   /* row opened from the map */
+.data-table .num{white-space:nowrap}

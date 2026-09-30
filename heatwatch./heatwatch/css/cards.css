@@ -1,0 +1,11 @@
+/* ==========================================================================
+   cards.css - CSS Task 5: each item shown as a card using the box model
+   (the sheet calls it a "book card"; here it is a zone card)
+   ========================================================================== */
+.card-row{text-align:center;margin:0 -8px 10px}
+.zone-card{display:inline-block;vertical-align:top;width:220px;margin:8px;padding:20px 16px;
+  border:1px solid #dce2e9;border-top:4px solid #ed9732;border-radius:10px;
+  background-color:#ffffff;box-shadow:0 6px 16px rgba(19,32,54,.12);text-align:center}
+.zone-card h3{margin-bottom:6px}
+.zone-card .zone-temp{display:block;font-size:34px;font-weight:650;margin:6px 0 10px}
+.zone-card p{font-size:14px;color:#5c6878;margin:10px 0 0}

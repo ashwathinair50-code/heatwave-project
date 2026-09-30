@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Heatwave Intelligence System: home page of the HeatWatch educational portal.">
+<title>Home | HeatWatch</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23132036'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23ffad45'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/layout.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="nav-wrap"><a class="brand" href="index.html"><span class="brand-icon" aria-hidden="true">&#9728;</span> HeatWatch<span class="brand-sub">HEATWAVE INTELLIGENCE SYSTEM</span></a><nav aria-label="Main navigation"><ul><li><a href="index.html" aria-current="page">Home</a></li><li><a href="dashboard.html">Dashboard</a></li><li><a href="forecast.html">Forecast</a></li><li><a href="hotspot-map.html">Hotspot map</a></li><li><a href="alerts.html">Alerts &amp; advisories</a></li><li><a href="about-system.html">About</a></li><li><a href="subscribe.html">Subscribe</a></li><li><a href="navigation.html">Site map</a></li></ul></nav></div></header>
+<div class="demo-bar"><span class="demo-label">SIMULATION</span> College project &middot; Sample data only, not live weather or official warnings.</div>
+<main id="main">
+
+<!-- CSS Task 1: inline styles on <header>, <h1> and <p>. HTML Task 1: global attributes id, class, title, style. -->
+<header id="home-header" class="page-header" title="Portal header"
+        style="background-color:#132036;padding:28px 24px;border:3px solid #ffad45;border-radius:12px;">
+  <p id="logo-text" class="logo-text" title="Logo text of the portal"
+     style="margin:0 0 10px;text-align:center;font-size:15px;font-weight:800;letter-spacing:4px;color:#ffad45;">&#9728; HEATWATCH</p>
+  <h1 id="system-name" class="system-name"
+      title="Heatwave Intelligence System: a portal that gathers temperature and humidity readings, classifies heat risk and helps issue early warnings."
+      style="margin:0 0 10px;text-align:center;color:#ffffff;">Heatwave Intelligence System</h1>
+  <p id="slogan" class="slogan" style="text-align:center;color:#e6ecf5;font-size:18px;margin:0 0 8px;">A little awareness. A safer day.</p>
+  <p id="season" class="season" title="Current monitoring season"
+     style="text-align:center;color:#ffd9a0;font-size:14px;margin:0;">Monitoring season: <strong>Summer 2026</strong> (March &ndash; June)</p>
+</header>
+
+<div class="home-grid">
+  <section class="status-card" aria-labelledby="status-city">
+    <div class="section-top"><span class="eyebrow">CURRENT DEMO STATUS</span><span class="badge high">High risk</span></div>
+    <h2 id="status-city">Nagpur, Maharashtra</h2>
+    <p class="muted">Fixed simulated snapshot &middot; Not current weather</p>
+    <div class="temperature">42<span>&deg;C</span></div>
+    <p>Air temperature</p>
+    <div class="status-details"><div><strong>30%</strong><span>Humidity</span></div><div><strong>45&deg;C</strong><span>Sample heat index</span></div></div>
+    <div class="status-advice">Limit time in the heat. Move outdoor activities to cooler hours and take regular cooling breaks.</div>
+    <a class="button" href="dashboard.html">Explore the dashboard <span aria-hidden="true">&rarr;</span></a>
+  </section>
+  <section class="purpose">
+    <p class="eyebrow">KNOW MORE. PREPARE BETTER.</p>
+    <h2>Heat awareness starts<br>with understanding.</h2>
+    <p>HeatWatch brings temperature, humidity, and heat risk information together in one simple portal. This student project shows how a monitoring interface can help a college community recognise hot conditions.</p>
+    <div class="feature"><span>1</span><div><h3>Compare conditions</h3><p>Explore four locations with a consistent set of simulated readings.</p></div></div>
+    <div class="feature"><span>2</span><div><h3>Know your next step</h3><p>Find clear risk labels and practical advice for each scenario.</p></div></div>
+    <a class="text-link" href="alerts.html">Read safety advisories &rarr;</a>
+  </section>
+</div>
+<aside class="note"><strong>A learning tool, with clear limits.</strong> All readings and risk categories are illustrative. This portal does not detect heatwaves, forecast weather, or issue real alerts.</aside>
+
+</main>
+<footer><div class="footer-inner"><div><strong>HeatWatch</strong><span>SY BTech &middot; Heatwave monitoring &amp; awareness</span></div><p>Educational prototype. Check your local weather authority for actual conditions.</p></div></footer>
+</body>
+</html>

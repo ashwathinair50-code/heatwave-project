@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="HeatWatch: an educational heatwave awareness portal using simulated readings.">
+<title>Climate Intelligence registration | HeatWatch</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23132036'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23ffad45'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/form.css">
+<style>
+/* error message sits beside the field when there is room, below it on narrow screens */
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+.row input[type="text"],.row input[type="email"],.row input[type="tel"],.row input[type="date"],.row select{flex:0 1 300px;width:auto;min-width:200px}
+.row .error{flex:1 1 200px;margin:0}
+.row .error:empty{display:none}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="nav-wrap"><a class="brand" href="index.html"><span class="brand-icon" aria-hidden="true">&#9728;</span> HeatWatch<span class="brand-sub">HEATWAVE INTELLIGENCE SYSTEM</span></a><nav aria-label="Main navigation"><ul><li><a href="index.html">Home</a></li><li><a href="dashboard.html">Dashboard</a></li><li><a href="forecast.html">Forecast</a></li><li><a href="hotspot-map.html">Hotspot map</a></li><li><a href="alerts.html">Alerts &amp; advisories</a></li><li><a href="about-system.html">About</a></li><li><a href="subscribe.html">Subscribe</a></li><li><a href="navigation.html">Site map</a></li></ul></nav></div></header>
+<div class="demo-bar"><span class="demo-label">SIMULATION</span> College project &middot; Sample data only, not live weather or official warnings.</div>
+<main id="main">
+<div class="page-heading"><p class="eyebrow">JAVASCRIPT LAB &middot; REGISTRATION FORM</p><h1>Climate Intelligence registration</h1><p class="lead">Register for heatwave monitoring and early-warning alerts. Every field is validated before the form is accepted.</p></div><form class="form-card" id="reg-form" action="#" method="post" novalidate><fieldset><legend>Personal details</legend><div class="field"><label for="user-name">User name *</label><div class="row"><input type="text" id="user-name" autocomplete="name"><span class="error" id="user-name-error"></span></div></div><div class="field"><label for="mobile">Mobile number *</label><div class="row"><input type="tel" id="mobile" inputmode="numeric" autocomplete="tel-national"><span class="error" id="mobile-error"></span></div></div><div class="field"><label for="email">Email *</label><div class="row"><input type="email" id="email" autocomplete="email"><span class="error" id="email-error"></span></div></div><div class="field"><label for="user-id">User ID * (format CLM-1234)</label><div class="row"><input type="text" id="user-id"><span class="error" id="user-id-error"></span></div></div><div class="field"><label for="age-group">Age group *</label><div class="row"><select id="age-group"><option value="">Select age group</option><option>Under 18</option><option>18-30</option><option>31-45</option><option>46-60</option><option>Above 60</option></select><span class="error" id="age-group-error"></span></div></div></fieldset><fieldset><legend>Location</legend><div class="field"><label for="city">Location / city *</label><div class="row"><input type="text" id="city" autocomplete="address-level2"><span class="error" id="city-error"></span></div></div><div class="field"><label for="pin">PIN / postal code *</label><div class="row"><input type="text" id="pin" inputmode="numeric" autocomplete="postal-code"><span class="error" id="pin-error"></span></div></div></fieldset><fieldset><legend>Alert preferences</legend><div class="field"><label for="category">User category *</label><div class="row"><select id="category"><option value="">Select category</option><option>General Public</option><option>Senior Citizen</option><option>Student</option><option>Outdoor Worker</option><option>Healthcare Worker</option><option>Government/Disaster Management</option><option>Other</option></select><span class="error" id="category-error"></span></div></div><fieldset id="channel-group" style="margin-top:8px"><legend>Preferred alert channel *</legend><div class="choice-group"><label><input type="radio" name="channel" value="SMS"> SMS</label><label><input type="radio" name="channel" value="Email"> Email</label><label><input type="radio" name="channel" value="WhatsApp"> WhatsApp</label><label><input type="radio" name="channel" value="Voice call"> Voice call</label></div><span class="error" id="channel-error"></span></fieldset><div class="field"><label for="reg-date">Registration date *</label><div class="row"><input type="date" id="reg-date"><span class="error" id="reg-date-error"></span></div></div></fieldset><div class="form-actions"><button type="submit">Register</button><button type="reset">Reset</button></div><p id="reg-success" class="success" role="status" tabindex="-1" hidden></p></form>
+</main>
+<footer><div class="footer-inner"><div><strong>HeatWatch</strong><span>SY BTech &middot; Heatwave monitoring &amp; awareness</span></div><p>Educational prototype. Check your local weather authority for actual conditions.</p></div></footer>
+<script>
+'use strict';
+(function () {
+
+  // Today's date as YYYY-MM-DD in the visitor's LOCAL time zone
+  // (toISOString() would use UTC and be a day off for part of the day in India).
+  function todayLocal() {
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+  // Show or clear the error for a field; returns true when the field is valid.
+  function setError(id, message) {
+    var field = document.getElementById(id);
+    var out = document.getElementById(id + '-error');
+    out.textContent = message;
+    field.classList.toggle('invalid', message !== '');
+    field.setAttribute('aria-invalid', message !== '' ? 'true' : 'false');
+    return message === '';
+  }
+
+  var form = document.getElementById('reg-form');
+  var success = document.getElementById('reg-success');
+  document.getElementById('reg-date').max = todayLocal();
+
+  function required(id, label) {
+    var v = document.getElementById(id).value.trim();
+    return v === '' ? setError(id, label + ' is required.') : null;
+  }
+  function checkPattern(id, label, regex, message) {
+    var v = document.getElementById(id).value.trim();
+    if (v === '') return setError(id, label + ' is required.');
+    return setError(id, regex.test(v) ? '' : message);
+  }
+  var validators = {
+    'user-name': function () { return checkPattern('user-name', 'User name', /^[A-Za-z ]+$/, 'Use alphabets and spaces only.'); },
+    'mobile':    function () { return checkPattern('mobile', 'Mobile number', /^[0-9]{10}$/, 'Enter exactly 10 digits.'); },
+    'email':     function () { return checkPattern('email', 'Email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'Enter a valid email such as name@example.com.'); },
+    'user-id':   function () { return checkPattern('user-id', 'User ID', /^CLM-[0-9]{4}$/, 'Use the pattern CLM-1234.'); },
+    'age-group': function () { return setError('age-group', document.getElementById('age-group').value === '' ? 'Select an age group.' : ''); },
+    'city':      function () { return checkPattern('city', 'Location / city', /^[A-Za-z ]+$/, 'Use alphabets and spaces only.'); },
+    'pin':       function () { return checkPattern('pin', 'PIN code', /^[0-9]{6}$/, 'Enter exactly 6 digits.'); },
+    'category':  function () { return setError('category', document.getElementById('category').value === '' ? 'Select a user category.' : ''); },
+    'channel': function () {
+      var ok = form.querySelector('input[name="channel"]:checked') !== null;
+      document.getElementById('channel-error').textContent = ok ? '' : 'Select a preferred alert channel.';
+      document.getElementById('channel-group').classList.toggle('invalid-group', !ok);
+      return ok;
+    },
+    'reg-date': function () {
+      var v = document.getElementById('reg-date').value;
+      if (v === '') return setError('reg-date', 'Registration date is required.');
+      if (v > todayLocal()) return setError('reg-date', 'Registration date cannot be in the future.');
+      return setError('reg-date', '');
+    }
+  };
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();               // never submit until every rule passes (and there is no server to send to)
+    success.hidden = true;
+    var allValid = true;
+    Object.keys(validators).forEach(function (id) { if (!validators[id]()) allValid = false; });
+    if (!allValid) {
+      var bad = form.querySelector('[aria-invalid="true"]') || form.querySelector('input[name="channel"]');
+      bad.focus();
+      return;
+    }
+    success.textContent = 'Registration Successful!\nYou are registered for Climate Intelligence\nHeatwave Monitoring and Early-Warning Alerts.';
+    success.hidden = false;
+    success.focus();
+  });
+  form.addEventListener('reset', function () {
+    success.hidden = true;
+    Object.keys(validators).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) { setError(id, ''); el.removeAttribute('aria-invalid'); }
+    });
+    document.getElementById('channel-error').textContent = '';
+    document.getElementById('channel-group').classList.remove('invalid-group');
+  });
+  Object.keys(validators).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('blur', validators[id]);
+    el.addEventListener('change', function () { success.hidden = true; if (el.getAttribute('aria-invalid') === 'true') validators[id](); });
+    el.addEventListener('input', function () { success.hidden = true; if (el.getAttribute('aria-invalid') === 'true') validators[id](); });
+  });
+  form.querySelectorAll('input[name="channel"]').forEach(function (r) { r.addEventListener('change', validators.channel); });
+})();
+</script>
+</body>
+</html>

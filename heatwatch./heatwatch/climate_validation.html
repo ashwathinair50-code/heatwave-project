@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="HeatWatch: an educational heatwave awareness portal using simulated readings.">
+<title>Registration details check | HeatWatch</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23132036'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23ffad45'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="nav-wrap"><a class="brand" href="index.html"><span class="brand-icon" aria-hidden="true">&#9728;</span> HeatWatch<span class="brand-sub">HEATWAVE INTELLIGENCE SYSTEM</span></a><nav aria-label="Main navigation"><ul><li><a href="index.html">Home</a></li><li><a href="dashboard.html">Dashboard</a></li><li><a href="forecast.html">Forecast</a></li><li><a href="hotspot-map.html">Hotspot map</a></li><li><a href="alerts.html">Alerts &amp; advisories</a></li><li><a href="about-system.html">About</a></li><li><a href="subscribe.html">Subscribe</a></li><li><a href="navigation.html">Site map</a></li></ul></nav></div></header>
+<div class="demo-bar"><span class="demo-label">SIMULATION</span> College project &middot; Sample data only, not live weather or official warnings.</div>
+<main id="main">
+<div class="page-heading"><p class="eyebrow">JAVASCRIPT LAB &middot; STRINGS &amp; REGEX</p><h1>Registration details check</h1><p class="lead">Checks six registration details with regular expressions and test().</p></div><form class="form-card" id="check-form" action="#">
+  <fieldset><legend>Registration details</legend>
+    <div class="form-grid">
+      <div class="field"><label for="user-name">User name</label><input type="text" id="user-name" placeholder="Rahul Sharma"><span class="error" id="user-name-error"></span></div>
+      <div class="field"><label for="mobile">Mobile number</label><input type="text" id="mobile" placeholder="9876543210" inputmode="numeric"><span class="error" id="mobile-error"></span></div>
+      <div class="field"><label for="email">Email address</label><input type="text" id="email" placeholder="rahul@gmail.com"><span class="error" id="email-error"></span></div>
+      <div class="field"><label for="location">Location</label><input type="text" id="location" placeholder="Mumbai"><span class="error" id="location-error"></span></div>
+      <div class="field"><label for="user-id">User ID</label><input type="text" id="user-id" placeholder="CLM-1234"><span class="error" id="user-id-error"></span></div>
+      <div class="field"><label for="pin">PIN code</label><input type="text" id="pin" placeholder="400077" inputmode="numeric"><span class="error" id="pin-error"></span></div>
+    </div>
+  </fieldset>
+  <div class="form-actions"><button type="submit">Validate</button><button type="button" class="button secondary" id="fill-example">Fill example</button><button type="reset">Reset</button></div>
+  <p id="result" class="success" role="status" tabindex="-1" hidden></p>
+</form>
+</main>
+<footer><div class="footer-inner"><div><strong>HeatWatch</strong><span>SY BTech &middot; Heatwave monitoring &amp; awareness</span></div><p>Educational prototype. Check your local weather authority for actual conditions.</p></div></footer>
+<script>
+'use strict';
+(function () {
+
+  // Today's date as YYYY-MM-DD in the visitor's LOCAL time zone
+  // (toISOString() would use UTC and be a day off for part of the day in India).
+  function todayLocal() {
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+  // Show or clear the error for a field; returns true when the field is valid.
+  function setError(id, message) {
+    var field = document.getElementById(id);
+    var out = document.getElementById(id + '-error');
+    out.textContent = message;
+    field.classList.toggle('invalid', message !== '');
+    field.setAttribute('aria-invalid', message !== '' ? 'true' : 'false');
+    return message === '';
+  }
+
+  // patterns from the lab sheet
+  var patterns = {
+    'user-name': /^[A-Za-z ]+$/,
+    'mobile': /^[6-9][0-9]{9}$/,
+    'email': /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    'location': /^[A-Za-z ]+$/,
+    'user-id': /^CLM-[0-9]{4}$/,
+    'pin': /^[0-9]{6}$/
+  };
+  var messages = {
+    'user-name': 'User name must contain only alphabets and spaces.',
+    'mobile': 'Mobile number must be exactly 10 digits and start with 6, 7, 8 or 9.',
+    'email': 'Enter a valid email address, such as rahul@gmail.com.',
+    'location': 'Location must contain only alphabets and spaces.',
+    'user-id': 'User ID must look like CLM-1234.',
+    'pin': 'PIN code must be exactly 6 digits.'
+  };
+  function validateField(id) {
+    var value = document.getElementById(id).value.trim();      // string method
+    if (value === '') return setError(id, 'This field cannot be empty.');
+    return setError(id, patterns[id].test(value) ? '' : messages[id]);   // RegExp test()
+  }
+  var form = document.getElementById('check-form');
+  var result = document.getElementById('result');
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    result.hidden = true;
+    var valid = true;
+    Object.keys(patterns).forEach(function (id) { if (!validateField(id)) valid = false; });
+    if (valid) {
+      result.textContent = 'All details are valid. Registration check passed for ' + document.getElementById('user-name').value.trim() + '.';
+      result.hidden = false;
+    } else {
+      form.querySelector('[aria-invalid="true"]').focus();
+    }
+  });
+  form.addEventListener('reset', function () {
+    result.hidden = true;
+    Object.keys(patterns).forEach(function (id) { setError(id, ''); document.getElementById(id).removeAttribute('aria-invalid'); });
+  });
+  document.getElementById('fill-example').addEventListener('click', function () {
+    var sample = { 'user-name': 'Rahul Sharma', 'mobile': '9876543210', 'email': 'rahul@gmail.com', 'location': 'Mumbai', 'user-id': 'CLM-1234', 'pin': '400077' };
+    Object.keys(sample).forEach(function (id) { document.getElementById(id).value = sample[id]; });
+  });
+})();
+</script>
+</body>
+</html>

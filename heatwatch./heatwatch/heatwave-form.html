@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="HeatWatch: an educational heatwave awareness portal using simulated readings.">
+<title>Heatwave monitoring form | HeatWatch</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23132036'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23ffad45'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="nav-wrap"><a class="brand" href="index.html"><span class="brand-icon" aria-hidden="true">&#9728;</span> HeatWatch<span class="brand-sub">HEATWAVE INTELLIGENCE SYSTEM</span></a><nav aria-label="Main navigation"><ul><li><a href="index.html">Home</a></li><li><a href="dashboard.html">Dashboard</a></li><li><a href="forecast.html">Forecast</a></li><li><a href="hotspot-map.html">Hotspot map</a></li><li><a href="alerts.html">Alerts &amp; advisories</a></li><li><a href="about-system.html">About</a></li><li><a href="subscribe.html">Subscribe</a></li><li><a href="navigation.html">Site map</a></li></ul></nav></div></header>
+<div class="demo-bar"><span class="demo-label">SIMULATION</span> College project &middot; Sample data only, not live weather or official warnings.</div>
+<main id="main">
+<div class="page-heading"><p class="eyebrow">JAVASCRIPT LAB &middot; FORMS</p><h1>Heatwave monitoring form</h1><p class="lead">Enter localised heatwave observations. Fields marked * are required; the browser checks the HTML5 input types.</p></div><form class="form-card" action="#" method="post">
+    <fieldset>
+      <legend>Observer details</legend>
+      <div class="form-grid">
+        <div class="field"><label for="observer-name">Observer name *</label>
+          <input type="text" id="observer-name" name="observerName" placeholder="e.g. Rahul Sharma" required>
+          </div>
+        <div class="field"><label for="email">Email *</label>
+          <input type="email" id="email" name="email" placeholder="e.g. rahul@example.com" required>
+          </div>
+        <div class="field"><label for="mobile">Mobile number *</label>
+          <input type="tel" id="mobile" name="mobile" pattern="[6-9][0-9]{9}" title="10-digit Indian mobile number starting with 6-9" placeholder="e.g. 9876543210" required>
+          </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Station and location</legend>
+      <div class="form-grid">
+        <div class="field"><label for="station-id">AWS station ID *</label>
+          <input type="text" id="station-id" name="stationId" pattern="AWS[0-9]{3}" title="AWS followed by three digits, e.g. AWS001" placeholder="e.g. AWS001" required>
+          </div>
+        <div class="field"><label for="location">Location *</label>
+          <input type="text" id="location" name="location" placeholder="e.g. Mumbai" required>
+          </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Observation</legend>
+      <div class="form-grid">
+        <div class="field"><label for="obs-date">Observation date *</label>
+          <input type="date" id="obs-date" name="obsDate" required>
+          </div>
+        <div class="field"><label for="max-temp">Maximum temperature (&deg;C) *</label>
+          <input type="number" id="max-temp" name="maxTemp" step="0.1" min="0" max="60" placeholder="e.g. 41.5" required>
+          </div>
+        <div class="field"><label for="humidity">Humidity (%) *</label>
+          <input type="number" id="humidity" name="humidity" step="1" min="0" max="100" placeholder="e.g. 60" required>
+          </div>
+        <div class="field"><label for="alert-level">Heatwave alert level *</label>
+          <select id="alert-level" name="alertLevel" required>
+            <option value="">Select a level</option>
+            <option value="green">Green - no warning</option>
+            <option value="yellow">Yellow - be aware</option>
+            <option value="orange">Orange - be prepared</option>
+            <option value="red">Red - take action</option>
+          </select></div>
+      </div>
+    </fieldset>
+    <div class="form-actions"><button type="submit">Submit observation</button><button type="reset">Reset</button></div>
+</form>
+</main>
+<footer><div class="footer-inner"><div><strong>HeatWatch</strong><span>SY BTech &middot; Heatwave monitoring &amp; awareness</span></div><p>Educational prototype. Check your local weather authority for actual conditions.</p></div></footer>
+</body>
+</html>

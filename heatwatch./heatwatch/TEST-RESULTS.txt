@@ -1,0 +1,138 @@
+PASS  about-system.html: loads with no script errors
+PASS  about-system.html: lang, title, main landmark
+PASS  about-system.html: no duplicate ids
+PASS  alert-details.html: loads with no script errors
+PASS  alert-details.html: lang, title, main landmark
+PASS  alert-details.html: no duplicate ids
+PASS  alerts.html: loads with no script errors
+PASS  alerts.html: lang, title, main landmark
+PASS  alerts.html: no duplicate ids
+PASS  climate_object.html: loads with no script errors
+PASS  climate_object.html: lang, title, main landmark
+PASS  climate_object.html: no duplicate ids
+PASS  climate_registration.html: loads with no script errors
+PASS  climate_registration.html: lang, title, main landmark
+PASS  climate_registration.html: no duplicate ids
+PASS  climate_validation.html: loads with no script errors
+PASS  climate_validation.html: lang, title, main landmark
+PASS  climate_validation.html: no duplicate ids
+PASS  dashboard.html: loads with no script errors
+PASS  dashboard.html: lang, title, main landmark
+PASS  dashboard.html: no duplicate ids
+PASS  forecast.html: loads with no script errors
+PASS  forecast.html: lang, title, main landmark
+PASS  forecast.html: no duplicate ids
+PASS  heatwave-form.html: loads with no script errors
+PASS  heatwave-form.html: lang, title, main landmark
+PASS  heatwave-form.html: no duplicate ids
+PASS  heatwave-validation.html: loads with no script errors
+PASS  heatwave-validation.html: lang, title, main landmark
+PASS  heatwave-validation.html: no duplicate ids
+PASS  heatwave_analysis.html: loads with no script errors
+PASS  heatwave_analysis.html: lang, title, main landmark
+PASS  heatwave_analysis.html: no duplicate ids
+PASS  heatwave_warning.html: loads with no script errors
+PASS  heatwave_warning.html: lang, title, main landmark
+PASS  heatwave_warning.html: no duplicate ids
+PASS  hotspot-map.html: loads with no script errors
+PASS  hotspot-map.html: lang, title, main landmark
+PASS  hotspot-map.html: no duplicate ids
+PASS  index.html: loads with no script errors
+PASS  index.html: lang, title, main landmark
+PASS  index.html: no duplicate ids
+PASS  media.html: loads with no script errors
+PASS  media.html: lang, title, main landmark
+PASS  media.html: no duplicate ids
+PASS  navigation.html: loads with no script errors
+PASS  navigation.html: lang, title, main landmark
+PASS  navigation.html: no duplicate ids
+PASS  sources.html: loads with no script errors
+PASS  sources.html: lang, title, main landmark
+PASS  sources.html: no duplicate ids
+PASS  subscribe.html: loads with no script errors
+PASS  subscribe.html: lang, title, main landmark
+PASS  subscribe.html: no duplicate ids
+PASS  temperature_analysis.html: loads with no script errors
+PASS  temperature_analysis.html: lang, title, main landmark
+PASS  temperature_analysis.html: no duplicate ids
+PASS  about-system.html: all local links/sources/anchors resolve
+PASS  alert-details.html: all local links/sources/anchors resolve
+PASS  alerts.html: all local links/sources/anchors resolve
+PASS  climate_object.html: all local links/sources/anchors resolve
+PASS  climate_registration.html: all local links/sources/anchors resolve
+PASS  climate_validation.html: all local links/sources/anchors resolve
+PASS  dashboard.html: all local links/sources/anchors resolve
+PASS  forecast.html: all local links/sources/anchors resolve
+PASS  heatwave-form.html: all local links/sources/anchors resolve
+PASS  heatwave-validation.html: all local links/sources/anchors resolve
+PASS  heatwave_analysis.html: all local links/sources/anchors resolve
+PASS  heatwave_warning.html: all local links/sources/anchors resolve
+PASS  hotspot-map.html: all local links/sources/anchors resolve
+PASS  index.html: all local links/sources/anchors resolve
+PASS  media.html: all local links/sources/anchors resolve
+PASS  navigation.html: all local links/sources/anchors resolve
+PASS  sources.html: all local links/sources/anchors resolve
+PASS  subscribe.html: all local links/sources/anchors resolve
+PASS  temperature_analysis.html: all local links/sources/anchors resolve
+PASS  dashboard: table built from data (4 rows)
+PASS  dashboard: New Delhi -> Extreme 45°C
+PASS  dashboard: Pune -> Low
+PASS  dashboard: Mumbai -> Moderate
+PASS  subscribe: empty submit shows errors, no success
+PASS  subscribe: mobile starting with 1 rejected
+PASS  subscribe: valid data -> success
+PASS  subscribe: reset hides success
+PASS  heatwave-validation: empty submit -> 9 errors, no success
+PASS  heatwave-validation: all valid -> success
+PASS  heatwave-validation: observer-name="Al" rejected (least 3)
+PASS  heatwave-validation: observer-name="R4hul" rejected (alphabets)
+PASS  heatwave-validation: station-id="AWS1" rejected (AWS001)
+PASS  heatwave-validation: station-id="aws001" rejected (AWS001)
+PASS  heatwave-validation: email="bad@" rejected (valid email)
+PASS  heatwave-validation: mobile="98765" rejected (10 digits)
+PASS  heatwave-validation: mobile="5876543210" rejected (starts with)
+PASS  heatwave-validation: max-temp="75" rejected (between 0 and 60)
+PASS  heatwave-validation: humidity="120" rejected (between 0 and 100)
+PASS  heatwave-validation: obs-date="2999-01-01" rejected (future)
+PASS  heatwave-validation: missing alert level blocks success
+PASS  heatwave_analysis: output matches the sheet exactly
+PASS  heatwave_warning: default matches sheet example (Pune 39/65 HIGH)
+PASS  heatwave_warning: 41 -> SEVERE
+PASS  heatwave_warning: 39/30%/30 -> MODERATE (rule gap closed)
+PASS  heatwave_warning: 36 -> MODERATE
+PASS  heatwave_warning: forecast 41 -> EARLY WARNING
+PASS  heatwave_warning: 30 -> NORMAL
+PASS  heatwave_warning: 38°C boundary humidity 59 vs 60
+PASS  climate_object: displayData + difference (+2°C)
+PASS  climate_object: 39°C/65% -> High
+PASS  climate_object: updateAlertStatus -> Cleared
+PASS  climate_object: forecast 41 -> early warning
+PASS  temperature_analysis: matches sheet example
+PASS  temperature_analysis: 6 readings above 37°C
+PASS  temperature_analysis: 10 chips
+PASS  climate_validation: sheet example is valid
+PASS  climate_validation: user-name="Rahul123" rejected
+PASS  climate_validation: mobile="1234567890" rejected
+PASS  climate_validation: email="rahul@" rejected
+PASS  climate_validation: location="Mumbai1" rejected
+PASS  climate_validation: user-id="CLM-12" rejected
+PASS  climate_validation: pin="40007" rejected
+PASS  climate_registration: empty submit -> 10 errors
+PASS  climate_registration: no channel -> blocked
+PASS  climate_registration: success text matches the sheet exactly
+PASS  climate_registration: future date rejected
+PASS  climate_registration: invalid field highlighted
+PASS  index: system name tooltip + inline styles on header/h1/p
+PASS  index: system name, logo text, season/year
+PASS  alert-details: strong, mark, em, small, sup, sub, abbr present
+PASS  alert-details: AWS, IMD, HW, SHW abbreviations
+PASS  about-system: three div sections + blockquote
+PASS  sources: ol, ul, nested ul, dl
+PASS  navigation: mailto, tel, IMD link, internal <style>
+PASS  hotspot-map: image map with clickable areas
+PASS  forecast: caption, thead, tbody, tfoot, colspan
+PASS  subscribe: select, radio, checkbox, submit, reset
+PASS  media: video, audio, iframe, noscript
+PASS  heatwave-form: input types, fieldset/legend, 9 required
+
+136 passed, 0 failed

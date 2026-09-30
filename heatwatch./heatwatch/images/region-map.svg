@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400" role="img" aria-label="Schematic regional heatwave hotspot map">
+<rect width="600" height="400" fill="#eaf0f7"/>
+<polygon points="70,50 300,30 530,60 520,140 300,150 80,135" fill="#fbe0e5" stroke="#9a2439" stroke-width="3"/>
+<polygon points="80,150 300,160 520,150 540,250 300,265 70,245" fill="#ffead5" stroke="#923e08" stroke-width="3"/>
+<polygon points="70,260 300,275 540,265 510,365 300,375 90,355" fill="#fff1c8" stroke="#785100" stroke-width="3"/>
+<g font-family="Segoe UI, Arial, sans-serif" font-weight="700" text-anchor="middle" fill="#17263d">
+<text x="300" y="88" font-size="24">Region A - North Zone</text><text x="300" y="112" font-size="15" font-weight="400">Extreme risk (sample)</text>
+<text x="300" y="203" font-size="24">Region B - Central Zone</text><text x="300" y="227" font-size="15" font-weight="400">High risk (sample)</text>
+<text x="300" y="318" font-size="24">Region C - West Zone</text><text x="300" y="342" font-size="15" font-weight="400">Low to moderate risk (sample)</text>
+</g>
+<text x="12" y="390" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#5c6878">Schematic map - not to scale - sample data</text>
+</svg>

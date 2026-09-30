@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="HeatWatch: an educational heatwave awareness portal using simulated readings.">
+<title>Heatwave temperature analysis | HeatWatch</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23132036'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23ffad45'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/form.css">
+<link rel="stylesheet" href="css/table.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="nav-wrap"><a class="brand" href="index.html"><span class="brand-icon" aria-hidden="true">&#9728;</span> HeatWatch<span class="brand-sub">HEATWAVE INTELLIGENCE SYSTEM</span></a><nav aria-label="Main navigation"><ul><li><a href="index.html">Home</a></li><li><a href="dashboard.html">Dashboard</a></li><li><a href="forecast.html">Forecast</a></li><li><a href="hotspot-map.html">Hotspot map</a></li><li><a href="alerts.html">Alerts &amp; advisories</a></li><li><a href="about-system.html">About</a></li><li><a href="subscribe.html">Subscribe</a></li><li><a href="navigation.html">Site map</a></li></ul></nav></div></header>
+<div class="demo-bar"><span class="demo-label">SIMULATION</span> College project &middot; Sample data only, not live weather or official warnings.</div>
+<main id="main">
+<div class="page-heading"><p class="eyebrow">JAVASCRIPT LAB &middot; VARIABLES &amp; OPERATORS</p><h1>Heatwave temperature analysis</h1><p class="lead">Compares the current temperature with the heatwave threshold for one location.</p></div><h2>Output (document.write)</h2>
+<script>
+'use strict';
+// ----- values and variables
+const locationName = 'Mumbai';            // string
+const currentTemp = 39;                   // number (degrees C)
+const thresholdTemp = 37;                 // number (degrees C)
+const humidity = 65;                      // number (percent)
+const monitoringDate = '2026-05-15';      // string
+
+// ----- operators and expressions
+const difference = currentTemp - thresholdTemp;        // arithmetic operator
+const crossed = currentTemp >= thresholdTemp;          // relational operator: threshold reached or crossed
+
+// ----- basic conditional statement
+let status;
+if (crossed) {
+  status = 'Heatwave Condition Detected';
+} else {
+  status = 'Normal - No Heatwave Condition';
+}
+
+const lines = [
+  'Location: ' + locationName,
+  'Current Temperature: ' + currentTemp + '\u00B0C',
+  'Heatwave Threshold: ' + thresholdTemp + '\u00B0C',
+  'Temperature Difference: ' + difference + '\u00B0C',
+  'Status: ' + status
+];
+
+// message printing 1: document.write() prints while the page loads
+document.write('<pre class="output">' + lines.join('\n') + '</pre>');
+// message printing 2: console.log() (open the browser console with F12)
+lines.forEach(function (line) { console.log(line); });
+</script>
+<button type="button" class="button" id="alert-btn">Show alert() message</button>
+<h2 style="margin-top:28px">Data types used</h2>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Variable</th><th>Value</th><th>typeof</th></tr></thead><tbody id="types-body"></tbody></table></div>
+<script>
+// message printing 3: alert() runs when the button is pressed (an automatic alert on every page load is annoying)
+document.getElementById('alert-btn').addEventListener('click', function () { alert(lines.join('\n')); });
+[['locationName', locationName], ['currentTemp', currentTemp], ['thresholdTemp', thresholdTemp], ['humidity', humidity],
+ ['monitoringDate', monitoringDate], ['crossed', crossed]].forEach(function (pair) {
+  var tr = document.createElement('tr');
+  [pair[0], String(pair[1]), typeof pair[1]].forEach(function (text) {
+    var td = document.createElement('td'); td.textContent = text; tr.appendChild(td);
+  });
+  document.getElementById('types-body').appendChild(tr);
+});
+</script>
+
+</main>
+<footer><div class="footer-inner"><div><strong>HeatWatch</strong><span>SY BTech &middot; Heatwave monitoring &amp; awareness</span></div><p>Educational prototype. Check your local weather authority for actual conditions.</p></div></footer>
+</body>
+</html>

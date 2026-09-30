@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="HeatWatch: an educational heatwave awareness portal using simulated readings.">
+<title>Heatwave form validation | HeatWatch</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23132036'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23ffad45'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="nav-wrap"><a class="brand" href="index.html"><span class="brand-icon" aria-hidden="true">&#9728;</span> HeatWatch<span class="brand-sub">HEATWAVE INTELLIGENCE SYSTEM</span></a><nav aria-label="Main navigation"><ul><li><a href="index.html">Home</a></li><li><a href="dashboard.html">Dashboard</a></li><li><a href="forecast.html">Forecast</a></li><li><a href="hotspot-map.html">Hotspot map</a></li><li><a href="alerts.html">Alerts &amp; advisories</a></li><li><a href="about-system.html">About</a></li><li><a href="subscribe.html">Subscribe</a></li><li><a href="navigation.html">Site map</a></li></ul></nav></div></header>
+<div class="demo-bar"><span class="demo-label">SIMULATION</span> College project &middot; Sample data only, not live weather or official warnings.</div>
+<main id="main">
+<div class="page-heading"><p class="eyebrow">JAVASCRIPT LAB &middot; VALIDATION</p><h1>Heatwave form validation</h1><p class="lead">The same form, checked with JavaScript. A success message appears only when every rule is satisfied.</p></div><form class="form-card" id="heatwave-form" action="#" method="post">
+    <fieldset>
+      <legend>Observer details</legend>
+      <div class="form-grid">
+        <div class="field"><label for="observer-name">Observer name *</label>
+          <input type="text" id="observer-name" name="observerName" placeholder="e.g. Rahul Sharma" required>
+          <span class="error" id="observer-name-error"></span></div>
+        <div class="field"><label for="email">Email *</label>
+          <input type="email" id="email" name="email" placeholder="e.g. rahul@example.com" required>
+          <span class="error" id="email-error"></span></div>
+        <div class="field"><label for="mobile">Mobile number *</label>
+          <input type="tel" id="mobile" name="mobile" placeholder="e.g. 9876543210" required>
+          <span class="error" id="mobile-error"></span></div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Station and location</legend>
+      <div class="form-grid">
+        <div class="field"><label for="station-id">AWS station ID *</label>
+          <input type="text" id="station-id" name="stationId" placeholder="e.g. AWS001" required>
+          <span class="error" id="station-id-error"></span></div>
+        <div class="field"><label for="location">Location *</label>
+          <input type="text" id="location" name="location" placeholder="e.g. Mumbai" required>
+          <span class="error" id="location-error"></span></div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Observation</legend>
+      <div class="form-grid">
+        <div class="field"><label for="obs-date">Observation date *</label>
+          <input type="date" id="obs-date" name="obsDate" required>
+          <span class="error" id="obs-date-error"></span></div>
+        <div class="field"><label for="max-temp">Maximum temperature (&deg;C) *</label>
+          <input type="number" id="max-temp" name="maxTemp" step="0.1" placeholder="e.g. 41.5" required>
+          <span class="error" id="max-temp-error"></span></div>
+        <div class="field"><label for="humidity">Humidity (%) *</label>
+          <input type="number" id="humidity" name="humidity" step="1" placeholder="e.g. 60" required>
+          <span class="error" id="humidity-error"></span></div>
+        <div class="field"><label for="alert-level">Heatwave alert level *</label>
+          <select id="alert-level" name="alertLevel" required>
+            <option value="">Select a level</option>
+            <option value="green">Green - no warning</option>
+            <option value="yellow">Yellow - be aware</option>
+            <option value="orange">Orange - be prepared</option>
+            <option value="red">Red - take action</option>
+          </select><span class="error" id="alert-level-error"></span></div>
+      </div>
+    </fieldset>
+    <div class="form-actions"><button type="submit">Submit observation</button><button type="reset">Reset</button></div>
+<p id="form-success" class="success" role="status" tabindex="-1" hidden></p></form><aside class="note"><strong>Rules</strong><ul class="rules">
+<li>Name: letters and spaces only, at least 3 characters. Station ID: AWS followed by 3 digits (AWS001).</li>
+<li>Email: valid format. Mobile: 10-digit Indian number starting with 6&ndash;9.</li>
+<li>Temperature: a number from 0 to 60 &deg;C. Humidity: 0 to 100. Date: required and not in the future. Alert level: required.</li></ul></aside>
+</main>
+<footer><div class="footer-inner"><div><strong>HeatWatch</strong><span>SY BTech &middot; Heatwave monitoring &amp; awareness</span></div><p>Educational prototype. Check your local weather authority for actual conditions.</p></div></footer>
+<script>
+'use strict';
+(function () {
+  var form = document.getElementById('heatwave-form');
+  var success = document.getElementById('form-success');
+  form.noValidate = true;   // our own messages replace the browser's pop-ups
+
+  // Today's date as YYYY-MM-DD in the visitor's LOCAL time zone
+  // (toISOString() would use UTC and be a day off for part of the day in India).
+  function todayLocal() {
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+  // Show or clear the error for a field; returns true when the field is valid.
+  function setError(id, message) {
+    var field = document.getElementById(id);
+    var out = document.getElementById(id + '-error');
+    out.textContent = message;
+    field.classList.toggle('invalid', message !== '');
+    field.setAttribute('aria-invalid', message !== '' ? 'true' : 'false');
+    return message === '';
+  }
+
+  // ----- Task 2: name and station ID
+  function validateName() {
+    var v = document.getElementById('observer-name').value.trim();
+    if (v === '') return setError('observer-name', 'Observer name is required.');
+    if (!/^[A-Za-z ]+$/.test(v)) return setError('observer-name', 'Use alphabets and spaces only.');
+    if (v.length < 3) return setError('observer-name', 'Name must have at least 3 characters.');
+    return setError('observer-name', '');
+  }
+  function validateStationId() {
+    var v = document.getElementById('station-id').value.trim();
+    if (v === '') return setError('station-id', 'AWS station ID is required.');
+    if (!/^AWS[0-9]{3}$/.test(v)) return setError('station-id', 'Use the format AWS001 (AWS followed by 3 digits).');
+    return setError('station-id', '');
+  }
+  function validateLocation() {
+    var v = document.getElementById('location').value.trim();
+    if (v === '') return setError('location', 'Location is required.');
+    return setError('location', '');
+  }
+  // ----- Task 3: email and mobile number
+  function validateEmail() {
+    var v = document.getElementById('email').value.trim();
+    if (v === '') return setError('email', 'Email is required.');
+    if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/.test(v)) return setError('email', 'Enter a valid email such as name@example.com.');
+    return setError('email', '');
+  }
+  function validateMobile() {
+    var v = document.getElementById('mobile').value.trim();
+    if (v === '') return setError('mobile', 'Mobile number is required.');
+    if (!/^[0-9]+$/.test(v)) return setError('mobile', 'Use digits only (no spaces or +91).');
+    if (v.length !== 10) return setError('mobile', 'A mobile number has exactly 10 digits.');
+    if (!/^[6-9]/.test(v)) return setError('mobile', 'An Indian mobile number starts with 6, 7, 8 or 9.');
+    return setError('mobile', '');
+  }
+  // ----- Task 4: temperature, humidity, date
+  function validateTemperature() {
+    var input = document.getElementById('max-temp');
+    var raw = input.value.trim();
+    if (raw === '') return setError('max-temp', input.validity.badInput ? 'Temperature must be numeric.' : 'Maximum temperature is required.');
+    var n = Number(raw);
+    if (!isFinite(n)) return setError('max-temp', 'Temperature must be numeric.');
+    if (n < 0 || n > 60) return setError('max-temp', 'Temperature must be between 0 and 60 \u00B0C.');
+    return setError('max-temp', '');
+  }
+  function validateHumidity() {
+    var input = document.getElementById('humidity');
+    var raw = input.value.trim();
+    if (raw === '') return setError('humidity', input.validity.badInput ? 'Humidity must be numeric.' : 'Humidity is required.');
+    var n = Number(raw);
+    if (!isFinite(n)) return setError('humidity', 'Humidity must be numeric.');
+    if (n < 0 || n > 100) return setError('humidity', 'Humidity must be between 0 and 100 percent.');
+    return setError('humidity', '');
+  }
+  function validateDate() {
+    var v = document.getElementById('obs-date').value;
+    if (v === '') return setError('obs-date', 'Observation date is required.');
+    if (v > todayLocal()) return setError('obs-date', 'Observation date cannot be in the future.');
+    return setError('obs-date', '');
+  }
+  function validateAlertLevel() {
+    var v = document.getElementById('alert-level').value;
+    if (v === '') return setError('alert-level', 'Select a heatwave alert level.');
+    if (['green', 'yellow', 'orange', 'red'].indexOf(v) === -1) return setError('alert-level', 'Select one of the listed levels.');
+    return setError('alert-level', '');
+  }
+
+  var checks = {
+    'observer-name': validateName, 'email': validateEmail, 'mobile': validateMobile, 'station-id': validateStationId,
+    'location': validateLocation, 'obs-date': validateDate, 'max-temp': validateTemperature, 'humidity': validateHumidity,
+    'alert-level': validateAlertLevel
+  };
+  document.getElementById('obs-date').max = todayLocal();
+
+  // ----- Task 5: submit event, preventDefault, success message
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    success.hidden = true;
+    var allValid = true;
+    Object.keys(checks).forEach(function (id) { if (!checks[id]()) allValid = false; });   // run every check so all errors show
+    if (!allValid) {
+      var firstBad = form.querySelector('[aria-invalid="true"]');
+      if (firstBad) firstBad.focus();
+      return;
+    }
+    var station = document.getElementById('station-id').value.trim();
+    var place = document.getElementById('location').value.trim();
+    var date = document.getElementById('obs-date').value;
+    success.textContent = 'Observation validated successfully for station ' + station + ' (' + place + ') on ' + date + '.';
+    success.hidden = false;
+    success.focus();
+  });
+  form.addEventListener('reset', function () {
+    success.hidden = true;
+    Object.keys(checks).forEach(function (id) { setError(id, ''); document.getElementById(id).removeAttribute('aria-invalid'); });
+  });
+  Object.keys(checks).forEach(function (id) {
+    var el = document.getElementById(id);
+    el.addEventListener('blur', checks[id]);
+    el.addEventListener('input', function () { success.hidden = true; if (el.getAttribute('aria-invalid') === 'true') checks[id](); });
+    el.addEventListener('change', function () { success.hidden = true; if (el.getAttribute('aria-invalid') === 'true') checks[id](); });
+  });
+})();
+</script>
+</body>
+</html>

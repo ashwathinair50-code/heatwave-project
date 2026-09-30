@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="HeatWatch: an educational heatwave awareness portal using simulated readings.">
+<title>Heatwave risk and early-warning decision | HeatWatch</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23132036'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23ffad45'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header"><div class="nav-wrap"><a class="brand" href="index.html"><span class="brand-icon" aria-hidden="true">&#9728;</span> HeatWatch<span class="brand-sub">HEATWAVE INTELLIGENCE SYSTEM</span></a><nav aria-label="Main navigation"><ul><li><a href="index.html">Home</a></li><li><a href="dashboard.html">Dashboard</a></li><li><a href="forecast.html">Forecast</a></li><li><a href="hotspot-map.html">Hotspot map</a></li><li><a href="alerts.html">Alerts &amp; advisories</a></li><li><a href="about-system.html">About</a></li><li><a href="subscribe.html">Subscribe</a></li><li><a href="navigation.html">Site map</a></li></ul></nav></div></header>
+<div class="demo-bar"><span class="demo-label">SIMULATION</span> College project &middot; Sample data only, not live weather or official warnings.</div>
+<main id="main">
+<div class="page-heading"><p class="eyebrow">JAVASCRIPT LAB &middot; DECISIONS</p><h1>Heatwave risk and early-warning decision</h1><p class="lead">Recommends a warning level from temperature, humidity and the forecast. Change the values and press Assess.</p></div><form class="form-card" id="scenario" action="#">
+  <fieldset><legend>Climate values</legend>
+    <div class="form-grid">
+      <div class="field"><label for="in-location">Location</label><input type="text" id="in-location" value="Pune"></div>
+      <div class="field"><label for="in-temp">Current temperature (&deg;C)</label><input type="number" id="in-temp" value="39" step="0.1"></div>
+      <div class="field"><label for="in-humidity">Humidity (%)</label><input type="number" id="in-humidity" value="65" step="1"></div>
+      <div class="field"><label for="in-forecast">Forecast temperature (&deg;C)</label><input type="number" id="in-forecast" value="38" step="0.1"></div>
+    </div>
+    <div class="choice-group">
+      <label><input type="checkbox" id="in-declared"> Heatwave condition already declared</label>
+      <label><input type="checkbox" id="in-vulnerable" checked> Vulnerable-population alert required</label>
+    </div>
+  </fieldset>
+  <div class="form-actions"><button type="submit">Assess</button></div>
+  <p class="error" id="scenario-error" role="alert"></p>
+</form>
+<h2 style="margin-top:26px">Result</h2>
+<pre class="output" id="result"></pre>
+<aside class="note"><strong>Decision rules used (in this order)</strong><ul class="rules">
+<li>Temperature &ge; 40&deg;C: Severe Heatwave Warning</li>
+<li>Temperature &ge; 38&deg;C and humidity &ge; 60%: High Heat Risk, issue warning</li>
+<li>Forecast &ge; 40&deg;C: Early Warning, prepare for heatwave</li>
+<li>Temperature 35&deg;C up to 40&deg;C: Moderate Heat Risk, monitor conditions</li>
+<li>Below 35&deg;C: Normal, continue monitoring</li></ul>
+The sheet&rsquo;s table stops the moderate band at 38&deg;C, which leaves 38&ndash;40&deg;C with low humidity and a mild forecast without any answer. This page closes that gap by extending Moderate to 40&deg;C.</aside>
+</main>
+<footer><div class="footer-inner"><div><strong>HeatWatch</strong><span>SY BTech &middot; Heatwave monitoring &amp; awareness</span></div><p>Educational prototype. Check your local weather authority for actual conditions.</p></div></footer>
+<script>
+'use strict';
+// ----- climate values held in JavaScript variables
+let locationName = 'Pune';
+let temperature = 39;
+let humidity = 65;
+let forecastTemp = 38;
+let heatwaveDeclared = false;
+let vulnerableAlert = true;
+
+function assess() {
+  let level, recommendation;
+  // if / else-if / else with relational (>=) and logical (&&) operators
+  if (temperature >= 40) {
+    level = 'SEVERE';          recommendation = 'Severe Heatwave Warning';
+  } else if (temperature >= 38 && humidity >= 60) {
+    level = 'HIGH';            recommendation = 'Issue Heatwave Warning';
+  } else if (forecastTemp >= 40) {
+    level = 'EARLY WARNING';   recommendation = 'Prepare for Heatwave';
+  } else if (temperature >= 35) {
+    level = 'MODERATE';        recommendation = 'Monitor Conditions';
+  } else {
+    level = 'NORMAL';          recommendation = 'Continue Monitoring';
+  }
+  const early = forecastTemp >= 40
+    ? 'Early Warning: prepare for heatwave (forecast ' + forecastTemp + '\u00B0C)'
+    : 'No early warning needed (forecast ' + forecastTemp + '\u00B0C)';
+  const lines = [
+    'Location: ' + locationName,
+    'Temperature: ' + temperature + '\u00B0C',
+    'Humidity: ' + humidity + '%',
+    'Risk Level: ' + level,
+    'Recommendation: ' + recommendation,
+    early
+  ];
+  if (heatwaveDeclared && (level === 'NORMAL' || level === 'MODERATE')) {
+    lines.push('Note: a heatwave is already declared, so keep advisories active.');
+  }
+  if (vulnerableAlert && (level === 'SEVERE' || level === 'HIGH' || level === 'EARLY WARNING' || heatwaveDeclared)) {
+    lines.push('Vulnerable groups: send targeted alerts to older adults, children and outdoor workers.');
+  }
+  document.getElementById('result').textContent = lines.join('\n');
+  console.log(lines.join('\n'));
+}
+
+document.getElementById('scenario').addEventListener('submit', function (event) {
+  event.preventDefault();
+  const t = document.getElementById('in-temp').value, h = document.getElementById('in-humidity').value, f = document.getElementById('in-forecast').value;
+  const err = document.getElementById('scenario-error');
+  if (t === '' || h === '' || f === '' || document.getElementById('in-location').value.trim() === '') {
+    err.textContent = 'Fill in the location, temperature, humidity and forecast.'; return;
+  }
+  if (Number(h) < 0 || Number(h) > 100) { err.textContent = 'Humidity must be between 0 and 100.'; return; }
+  err.textContent = '';
+  locationName = document.getElementById('in-location').value.trim();
+  temperature = Number(t); humidity = Number(h); forecastTemp = Number(f);
+  heatwaveDeclared = document.getElementById('in-declared').checked;
+  vulnerableAlert = document.getElementById('in-vulnerable').checked;
+  assess();
+});
+assess();
+</script>
+</body>
+</html>
